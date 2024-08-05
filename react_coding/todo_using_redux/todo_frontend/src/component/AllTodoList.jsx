@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllTodos } from '../redux/actions'
@@ -19,10 +19,11 @@ const AllTodoList = () => {
     }
   },[reFetchAllTodosFlag])
   return (
-    <Flex w={'100%'} direction={'column'} justifyContent={'center'} alignItems={'center'}>
+    <Flex w={'100%'} direction={'column'} justifyContent={'center'} alignItems={'center'} >
+    <Text fontSize={'x-large'} p={'10px 0px'}>All Todos</Text>
         {
-          allTodos && (
-            <Flex w={'100%'}  justifyContent={'center'} alignItems={'center'} direction={'column'}>
+          allTodos ? (
+            <Flex w={'100%'}  justifyContent={'center'} alignItems={'center'} direction={'column'} p={'20px 0px'}>
             <TableContainer>
         <Table variant="simple">
           <Thead>
@@ -44,6 +45,10 @@ const AllTodoList = () => {
         </Table>
       </TableContainer>
               
+            </Flex>
+          ):(
+            <Flex>
+              <Text fontSize={'lg'}>No Todos available</Text>
             </Flex>
           )
         }
