@@ -1,13 +1,25 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Button, Flex, Td, Text, Tr } from '@chakra-ui/react'
 import React from 'react'
+import { FaRegEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const SingleTodoItem = ({todo}) => {
   return (
-    <Flex gap={'10px'}>
-      <Text>{todo.todoName}</Text>
-      <Text>{todo.assigneeName}</Text>
-      <Text>{todo.priority}</Text>
-    </Flex>
+    <Tr >
+        <Td>{todo.todoName}</Td>
+        <Td>{todo.assigneeName}</Td>
+        <Td>{todo.priority}</Td>
+        <Td>
+            <Button leftIcon={<FaRegEdit />} colorScheme="orange" variant="solid">
+                Edit
+            </Button>
+        </Td>
+        <Td>
+            <Button leftIcon={<RiDeleteBin6Line />} colorScheme="red" variant="solid">
+                Delete
+            </Button>
+        </Td>
+    </Tr>
   )
 }
 
