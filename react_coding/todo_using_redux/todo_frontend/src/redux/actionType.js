@@ -1,0 +1,2 @@
+export const UPDATE_TODO_FORM = 'UPDATE_TODO_FORM'
+export const SAVE_ALL_TODOS = 'SAVE_ALL_TODOS'
