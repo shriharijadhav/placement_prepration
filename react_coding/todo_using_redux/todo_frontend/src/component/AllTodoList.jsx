@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllTodos } from '../redux/actions'
 import SingleTodoItem from './SingleTodoItem'
 import { Table, Thead, Tbody, Tr, Th, Td, TableContainer, Box, Heading } from '@chakra-ui/react';
+import SkeletonForTable from './SkeletonForTable';
 
 
 const AllTodoList = () => {
@@ -14,15 +15,21 @@ const AllTodoList = () => {
 
 
   useEffect(()=>{
+    
+    
     if(reFetchAllTodosFlag){
       dispatch(fetchAllTodos())
     }
+
   },[reFetchAllTodosFlag])
+
+
+
   return (
     <Flex w={'100%'} direction={'column'} justifyContent={'center'} alignItems={'center'} >
     <Text fontSize={'x-large'} p={'10px 0px'}>All Todos</Text>
         {
-          allTodos ? (
+          allTodos && (
             <Flex w={'100%'}  justifyContent={'center'} alignItems={'center'} direction={'column'} p={'20px 0px'}>
             <TableContainer>
         <Table variant="simple">
@@ -45,10 +52,6 @@ const AllTodoList = () => {
         </Table>
       </TableContainer>
               
-            </Flex>
-          ):(
-            <Flex>
-              <Text fontSize={'lg'}>No Todos available</Text>
             </Flex>
           )
         }

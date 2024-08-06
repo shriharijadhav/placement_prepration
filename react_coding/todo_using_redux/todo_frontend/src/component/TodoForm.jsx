@@ -8,10 +8,13 @@ import {
   } from '@chakra-ui/react'
 import { Radio, RadioGroup } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  saveTodoInDatabase, updateTodoForm } from '../redux/actions'
+import {  resetTodoForm, saveTodoInDatabase, updateTodoForm, updateTodoInDatabase } from '../redux/actions'
 const TodoForm = () => {
    
     const todoForm = useSelector((store) => store.todoForm)
+    const editFlowTriggered = useSelector((store)=>store.editFlowTriggered)
+
+
     const todoName = todoForm.todoName
     const assigneeName = todoForm.assigneeName
     const priority = todoForm.priority
@@ -21,7 +24,11 @@ const TodoForm = () => {
 
     const handleSubmit = (e) =>{
       e.preventDefault();
-      dispatch(saveTodoInDatabase(todoForm))
+      if(editFlowTriggered){
+        dispatch(updateTodoInDatabase(todoForm))
+      }else{
+        dispatch(saveTodoInDatabase(todoForm))
+      }
     }
 
   return (
@@ -46,7 +53,16 @@ const TodoForm = () => {
           </RadioGroup>
           
         </FormControl>
-        <Button type='submit' >Submit</Button>
+          {
+            editFlowTriggered?(
+              <Flex justifyContent={'center'} gap={'10px'}>
+                <Button type='submit' >Update</Button>
+                <Button onClick={()=>{dispatch(resetTodoForm())}} >Cancel</Button>
+              </Flex>
+            ):(
+              <Button type='submit' >Submit</Button>
+            )
+          }
         </Flex>
     </Flex>
   )
